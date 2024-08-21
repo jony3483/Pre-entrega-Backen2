@@ -1,0 +1,123 @@
+[
+  {
+    "title": "te",
+    "description": "De Colombia",
+    "price": "4500",
+    "img": "Sin Imagen",
+    "code": "abc12",
+    "stock": "50",
+    "category": "Almacen",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "title": "Cafe",
+    "description": "De Colombia",
+    "price": "2500",
+    "img": "Sin Imagen",
+    "code": "abc124",
+    "stock": "150",
+    "category": "Almacen",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "title": "Harina",
+    "description": "Molinos",
+    "price": "3500",
+    "img": "Sin Imagen",
+    "code": "abc125",
+    "stock": "150",
+    "category": "Almacen",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "title": "Palmitos",
+    "description": "¿Quien compra esto?",
+    "price": "5500",
+    "img": "Sin Imagen",
+    "code": "abc126",
+    "stock": "150",
+    "category": "Almacen",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "title": "mate",
+    "description": "de palo",
+    "price": "500",
+    "img": "sin imagen",
+    "code": "a1",
+    "stock": "5000",
+    "category": "almacen",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "title": "coca cola",
+    "description": "2 litro",
+    "price": "500",
+    "img": "sin imagen",
+    "code": "b1",
+    "stock": "5000",
+    "category": "bebidas",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "title": "fanta",
+    "description": "1 litro",
+    "price": "500",
+    "img": "sin imagen",
+    "code": "b2",
+    "stock": "5000",
+    "category": "bebidas",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "title": "sprite",
+    "description": "3 litros",
+    "price": "500",
+    "img": "sin imagen",
+    "code": "b3",
+    "stock": "5000",
+    "category": "bebidas",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "title": "casata",
+    "description": "lucuma",
+    "price": "800",
+    "img": "sin imagen",
+    "code": "c1",
+    "stock": "5000",
+    "category": "helados",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "title": "barquillo",
+    "description": "frutilla",
+    "price": "600",
+    "img": "sin imagen",
+    "code": "c2",
+    "stock": "5000",
+    "category": "helados",
+    "status": true,
+    "thumbnails": []
+  },
+  {
+    "title": "paleta",
+    "description": "maracuya",
+    "price": "100",
+    "img": "sin imagen",
+    "code": "c3",
+    "stock": "5000",
+    "category": "helados",
+    "status": true,
+    "thumbnails": []
+  }
+]

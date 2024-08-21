@@ -1,0 +1,32 @@
+
+h1{
+    color: rgb(245, 130, 130);
+    text-align: center;
+    padding: 15px;
+}
+nav{
+    background-color: blue;
+    width: 100%;
+    height: 70px;
+}
+div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid blue;
+    text-align: center;
+    margin-top: 10px;
+    margin: 5px;
+
+}
+
+a{
+    background-color: brown;
+    color: aliceblue;
+    padding-left: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
