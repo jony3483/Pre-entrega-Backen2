@@ -1,10 +1,11 @@
 
-import { promises as fs } from "fs";
+import fs  from "fs/promises";
+import path from "path";
 
 class CartManager {
-    constructor(path) {
+    constructor(filepath) {
         this.carts = [];
-        this.path = path;
+        this.path = path.resolve(filepath);
         this.ultId = 0;
 
         // Cargar los carritos almacenados en el archivo
@@ -20,15 +21,27 @@ class CartManager {
                 this.ultId = Math.max(...this.carts.map(cart => cart.id));
                 //Utilizo el método map para crear un nuevo array que solo tenga los identificadores del carrito y con Math.max obtengo el mayor. 
             }
+            return this.carts;
         } catch (error) {
-            console.error("Error al cargar los carritos desde el archivo", error);
-            // Si no existe el archivo, lo voy a crear. 
-            await this.guardarCarritos();
+            if (error.code === 'ENOENT') {
+                console.log(`Error al cargar ${this.path} no existe carrito, crea uno nuevo mas vivaldi`);
+                // Si no existe el archivo, lo voy a crear. 
+                await this.guardarCarritos();
+                return this.carts;
+            } else {
+                console.error("error al cargar los carritos desde el archivo", error);
+            }
+            
         }
     }
 
     async guardarCarritos() {
-        await fs.writeFile(this.path, JSON.stringify(this.carts, null, 2));
+        try {
+            await fs.writeFile(this.path, JSON.stringify(this.carts, null, 2));
+        } catch (error) {
+            console.error("error al guardar carrito", error);
+        }
+        
     }
 
     async crearCarrito() {

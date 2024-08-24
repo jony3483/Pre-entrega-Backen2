@@ -15,6 +15,11 @@ const schema = new mongoose.Schema({
         unique: true,
         index: true
     },
+    cart_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'carts',
+        required: true
+    },
     password: {
         type: String,
         required: true

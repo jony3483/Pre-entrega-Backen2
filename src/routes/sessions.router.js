@@ -1,4 +1,6 @@
 import { Router } from "express";
+import UserModel from "../dao/fs/data/user.model.js";
+
 const router = Router();
 
 //importmanos passport:

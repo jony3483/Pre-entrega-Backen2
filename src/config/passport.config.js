@@ -1,13 +1,30 @@
 
 //importacion de modulos:
 import passport from "passport";
-import local from "passport-local";
+import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
 
-//me traigo el model y las funciones de bcrypt
-import UserModel from "../dao/fs/data/user.model.js";
+import CartManager from "../dao/db/cart-manager-db.js";
+import UserModel from "../dao/models/user.model.js";
+
+import jwt from "passport-jwt";
 import { createHash, isValidPassword } from "../utils/hashbcrypt.js";
 
-const LocalStrategy = local.Strategy;
+//instancia del gestor de carritos
+const cartManager = new CartManager();
+
+//calve secreta para firmar los jwt
+const JWT_SECRET = "coderhouse";
+
+//funcion para extraer el token jwt desde las cookies
+const cookieExtractor = req => {
+    let token = null;
+    if (req && req.cookies) {
+        token = req.cookies["coderCookieToken"];
+    }
+    return token;
+}
+
 
 const initializePassport = () => {
     //creamos la primera estrategia de register
@@ -18,19 +35,23 @@ const initializePassport = () => {
         //el usuario sera el mail que ya tengo registrado
     }, async (req, username, password, done) => {
         //me guardo los datos que vienen en el body
-        const { first_name, last_name, email, age} = req.body;
+        const { first_name, last_name, email, age, role} = req.body;
 
         try {
             //Verificamos si ya existe un registro con ese mail: 
             let user = await UserModel.findOne({ email: email });
                 if (user) return done(null, false);
+
+                const carrito = await cartManager.crearCarrito();
                 //Si no existe, voy a crear uno nuevo: 
                     let newUser = {
                         first_name,
                         last_name,
                         email,
+                        cart_id: carrito_id, // guarda el id del carrito en el nuevo usuario
                         age,
-                        password: createHash(password)
+                        password: createHash(password),
+                        role: role || "usuario"
                     }
 
                     let result = await UserModel.create(newUser);
@@ -64,17 +85,33 @@ const initializePassport = () => {
         }
     }))
 
-    //serializar y deserializar
+    //estrategia autenticacion jwt basada en cookies
+    passport.use("jwt", new JWTStrategy({
+        jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
+        secretOrKey: JWT_SECRET
+    }, async (jwt_payload, done) => {
+        try {
+            return done(null, jwt_payload);
+        } catch (error) {
+            return done(error);
+        }
+    }))
 
+    //serializar al usuario
     passport.serializeUser((user, done) => {
         done(null, user._id);
     })
-
+    
+    //deerializacion del usuario
     passport.deserializeUser(async (id, done) => {
-        let user = await UserModel.findById({_id:id});
-        done(null, user);
+        try {
+            const user = await UserModel.findById(id);
+            done(null, user);
+        } catch (error) {
+            done(error, null);
+        }
+        
     })
-
 }
 
 export default initializePassport;

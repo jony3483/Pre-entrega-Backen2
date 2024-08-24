@@ -40,6 +40,7 @@ const productoSchema = new mongoose.Schema({
     }
 })
 
+//aqui el plugins de paginacion al esquema
 productoSchema.plugin(mongoosePaginate);
 
 //Aca creamos el model y lo exportamos: 
